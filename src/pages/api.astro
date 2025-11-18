@@ -1,69 +1,328 @@
 ---
 const sampleRequest = {
-   "MOFID": "12321",
-   "CPID": "423432",
-   "CRN": 1312321
+  "MOFID": "12321",
+  "CPID": "423432",
+  "CRN": 1312321
 };
 
 const sampleResponse = {
  "ListofMof": [
-   {
-     "Mof_Id": 9,
-     "MOF_Status": "Aug",
-     "MOF_Limit_CCY": "INR",
-     "MOF_Limit": 1312321,
-     "Availed_Limit": 3213213,
-     "Outstanding": 321321
-   }
+  {
+   "Mof_Id": 9,
+   "MOF_Status": "Aug",
+   "MOF_Limit_CCY": "INR",
+   "MOF_Limit": 1312321,
+   "Availed_Limit": 3213213,
+   "Outstanding": 321321,
+   "Live_MOF_Expiry_Date": "10-Oct-2025",
+   "CP_Id": 321321,
+   "Counterparty_Name": "Test1",
+   "Group_CP_Id": 432432,
+   "Group_Name": "Test",
+   "Facilities": [
+    {
+     "Facility_Id": "",
+     "Facility_Status": "",
+     "CP_Id": "",
+     "Product_Name": "",
+     "Limit_Id": "",
+     "MOF_Id": "",
+     "Sanc._Limit_(INR)": "",
+     "Loaded_Limit_(INR)": "",
+     "Outstanding": "",
+     "Limit_Expiry_Date": "",
+     "Availability_End_Date": "",
+     "Loan_Type": "",
+     "Limit_Expired": ""
+    },
+    {
+     "Facility_Id": "",
+     "Facility_Status": "",
+     "CP_Id": "",
+     "Product_Name": "",
+     "Limit_Id": "",
+     "MOF_Id": "",
+     "Sanc._Limit_(INR)": "",
+     "Loaded_Limit_(INR)": "",
+     "Outstanding": "",
+     "Limit_Expiry_Date": "",
+     "Availability_End_Date": "",
+     "Loan_Type": "",
+     "Limit_Expired": ""
+    }
+   ]
+  },
+  {
+   "Mof_Id": 10,
+   "MOF_Status ": "Sep",
+   "MOF_Limit_CCY ": 11,
+   "MOF_Limit": 1312321,
+   "Availed_Limit": 3213213,
+   "Outstanding": 321321,
+   "Live_MOF_Expiry_Date": "10-Oct-2025",
+   "CP_Id": 321321,
+   "Counterparty_Name": "Test1",
+   "Group_CP_Id": 432432,
+   "Group_Name": "Test",
+   "Facilities": [
+    {
+     "Facility_Id": "",
+     "Facility_Status": "",
+     "CP_Id": "",
+     "Product_Name": "",
+     "Limit_Id": "",
+     "MOF_Id": "",
+     "Sanc._Limit_(INR)": "",
+     "Loaded_Limit_(INR)": "",
+     "Outstanding": "",
+     "Limit_Expiry_Date": "",
+     "Availability_End_Date": "",
+     "Loan_Type": "",
+     "Limit_Expired": ""
+    },
+    {
+     "Facility_Id": "",
+     "Facility_Status": "",
+     "CP_Id": "",
+     "Product_Name": "",
+     "Limit_Id": "",
+     "MOF_Id": "",
+     "Sanc._Limit_(INR)": "",
+     "Loaded_Limit_(INR)": "",
+     "Outstanding": "",
+     "Limit_Expiry_Date": "",
+     "Availability_End_Date": "",
+     "Loan_Type": "",
+     "Limit_Expired": ""
+    }
+   ]
+  },
+  {
+   "Mof_Id": 11,
+   "MOF_Status ": "Oct",
+   "MOF_Limit_CCY": 7,
+   "MOF_Limit": 1312321,
+   "Availed_Limit": 3213213,
+   "Outstanding": 321321,
+   "Live_MOF_Expiry_Date": "10-Oct-2025",
+   "CP_Id": 321321,
+   "Counterparty_Name": "Test1",
+   "Group_CP_Id": 432432,
+   "Group_Name": "Test",
+   "Facilities": [
+    {
+     "Facility_Id": "",
+     "Facility_Status": "",
+     "CP_Id": "",
+     "Product_Name": "",
+     "Limit_Id": "",
+     "MOF_Id": "",
+     "Sanc._Limit_(INR)": "",
+     "Loaded_Limit_(INR)": "",
+     "Outstanding": "",
+     "Limit_Expiry_Date": "",
+     "Availability_End_Date": "",
+     "Loan_Type": "",
+     "Limit_Expired": ""
+    }
+   ]
+  }
  ]
 };
 
 const requestSpec = [
-  { field: "MOFID", minLength: 5, maxLength: 10, pattern: "\\d+" },
-  { field: "CPID", minLength: 5, maxLength: 10, pattern: "\\d+" },
-  { field: "CRN", minLength: 6, maxLength: 12, pattern: "\\d+" }
+  { field: "MOFID", minLength: 5, maxLength: 10, pattern: "^(?![nN][uU][lL][lL]$)(?:[a-zA-Z0-9]{5,10})$" },
+  { field: "CPID", minLength: 5, maxLength: 10, pattern: "^(?![nN][uU][lL][lL]$)(?:[a-zA-Z0-9]{5,10})$" },
+  { field: "CRN", minLength: 6, maxLength: 12, pattern: "^(?![nN][uU][lL][lL]$)(?:[a-zA-Z0-9]{6,12})$" }
 ];
 ---
 
 <html>
-  <head>
-    <title>MOF List API Spec</title>
-    <style>
-      body { font-family: Arial; padding: 20px; }
-      pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
-      table { border-collapse: collapse; margin-top: 20px; }
-      th, td { border: 1px solid #ccc; padding: 5px 10px; }
-      th { background: #eee; }
-    </style>
-  </head>
-  <body>
-    <h1>MOF List API Spec</h1>
+<head>
+  <title>GLEMS – MOF List API</title>
 
-    <h2>URL</h2>
-    <p>http://localhost:7055/v1/glems/mof-list</p>
+  <style>
+    body {
+      margin: 0;
+      background: #0d1117;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
 
-    <h2>Sample Request</h2>
-    <pre>{JSON.stringify(sampleRequest, null, 2)}</pre>
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: #0f141b;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      border-right: 1px solid #1f242d;
+      padding-top: 1rem;
+    }
 
-    <h2>Request Field Details</h2>
-    <table>
-      <tr>
-        <th>Field</th>
-        <th>Min Length</th>
-        <th>Max Length</th>
-        <th>Regex Pattern</th>
-      </tr>
-      {requestSpec.map(field => (
+    .sidebar-title {
+      font-size: 1.4rem;
+      padding: 1rem 1.5rem;
+      font-weight: bold;
+      color: #bcd1ff;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .menu li {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #ddd;
+      font-size: 0.95rem;
+    }
+
+    .menu li:hover,
+    .active {
+      background: #1c2330;
+      color: #fff;
+    }
+
+    /* Top bar */
+    .topbar {
+      margin-left: 260px;
+      height: 60px;
+      background: #0f141b;
+      border-bottom: 1px solid #1f242d;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      justify-content: space-between;
+    }
+
+    .search {
+      width: 350px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      color: white;
+    }
+
+    /* Main Content */
+    .container {
+      margin-left: 260px;
+      padding: 30px 50px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    .endpoint-box {
+      background: #11161f;
+      padding: 15px;
+      border-left: 3px solid #2ea043;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .section-title {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .panel {
+      background: #11161f;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #1e2632;
+    }
+
+    pre {
+      background: #0f141b;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      border: 1px solid #1f242d;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #2a333f;
+    }
+
+    th {
+      background: #1a222f;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-title">GLEMS</div>
+
+    <ul class="menu">
+
+      <li class="active">mof-list</li>
+    </ul>
+  </div>
+
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <h1>MOF List API</h1>
+
+    <div class="endpoint-box">
+      <strong>POST</strong> /v1/glems/mof-list
+    </div>
+
+    <h2 class="section-title">Sample Request</h2>
+    <div class="panel">
+      <pre>{JSON.stringify(sampleRequest, null, 2)}</pre>
+    </div>
+
+    <h2 class="section-title">Request Field Details</h2>
+    <div class="panel">
+      <table>
         <tr>
-          <td>{field.field}</td>
-          <td>{field.minLength}</td>
-          <td>{field.maxLength}</td>
-          <td><code>{field.pattern}</code></td>
+          <th>Field</th>
+          <th>Min Length</th>
+          <th>Max Length</th>
+          <th>Regex Pattern</th>
         </tr>
-      ))}
-    </table>
+        {
+          requestSpec.map(f => (
+            <tr>
+              <td>{f.field}</td>
+              <td>{f.minLength}</td>
+              <td>{f.maxLength}</td>
+              <td><code>{f.pattern}</code></td>
+            </tr>
+          ))
+        }
+      </table>
+    </div>
 
-    <h2>Sample Response</h2>
-    <pre>{JSON.stringify(sampleResponse, null, 2)}</pre>
-  </body>
+    <h2 class="section-title">Sample Response</h2>
+    <div class="panel">
+      <pre>{JSON.stringify(sampleResponse, null, 2)}</pre>
+    </div>
+
+  </div>
+</body>
 </html>

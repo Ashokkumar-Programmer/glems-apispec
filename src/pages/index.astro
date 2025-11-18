@@ -1,11 +1,115 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+/* No external CSS needed */
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GLEMS Implementation</title>
+    <meta name="description" content="API Collection" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0d0d0d;
+        color: white;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2rem;
+        background-color: #0f0f0f;
+        border-bottom: 1px solid #1f1f1f;
+      }
+
+      header a {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #bcd1ff;
+        text-decoration: none;
+      }
+
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6rem 3rem;
+        gap: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        color: #c0c0c0;
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+      }
+
+      .action-btn {
+        display: inline-flex;
+        align-items: center;
+        background-color: #1e74ff;
+        padding: 0.9rem 1.8rem;
+        font-weight: bold;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        transition: background 0.3s ease;
+      }
+
+      .action-btn:hover {
+        background-color: #155ad1;
+      }
+
+      .action-btn svg {
+        margin-left: 0.6rem;
+      }
+
+      .hero img {
+        width: 320px;
+        max-width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          text-align: center;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <a href="/">GLEMS</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>GLEMS</h1>
+        <p>API Collection!</p>
+
+        <a href="/api" class="action-btn">
+          Explore
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/>
+          </svg>
+        </a>
+      </div>
+
+      <img src="/images/houston.webp" alt="Hero Image" />
+    </section>
+  </body>
+</html>
