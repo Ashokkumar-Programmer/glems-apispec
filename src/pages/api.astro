@@ -1,0 +1,69 @@
+---
+const sampleRequest = {
+   "MOFID": "12321",
+   "CPID": "423432",
+   "CRN": 1312321
+};
+
+const sampleResponse = {
+ "ListofMof": [
+   {
+     "Mof_Id": 9,
+     "MOF_Status": "Aug",
+     "MOF_Limit_CCY": "INR",
+     "MOF_Limit": 1312321,
+     "Availed_Limit": 3213213,
+     "Outstanding": 321321
+   }
+ ]
+};
+
+const requestSpec = [
+  { field: "MOFID", minLength: 5, maxLength: 10, pattern: "\\d+" },
+  { field: "CPID", minLength: 5, maxLength: 10, pattern: "\\d+" },
+  { field: "CRN", minLength: 6, maxLength: 12, pattern: "\\d+" }
+];
+---
+
+<html>
+  <head>
+    <title>MOF List API Spec</title>
+    <style>
+      body { font-family: Arial; padding: 20px; }
+      pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+      table { border-collapse: collapse; margin-top: 20px; }
+      th, td { border: 1px solid #ccc; padding: 5px 10px; }
+      th { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <h1>MOF List API Spec</h1>
+
+    <h2>URL</h2>
+    <p>http://localhost:7055/v1/glems/mof-list</p>
+
+    <h2>Sample Request</h2>
+    <pre>{JSON.stringify(sampleRequest, null, 2)}</pre>
+
+    <h2>Request Field Details</h2>
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Min Length</th>
+        <th>Max Length</th>
+        <th>Regex Pattern</th>
+      </tr>
+      {requestSpec.map(field => (
+        <tr>
+          <td>{field.field}</td>
+          <td>{field.minLength}</td>
+          <td>{field.maxLength}</td>
+          <td><code>{field.pattern}</code></td>
+        </tr>
+      ))}
+    </table>
+
+    <h2>Sample Response</h2>
+    <pre>{JSON.stringify(sampleResponse, null, 2)}</pre>
+  </body>
+</html>
